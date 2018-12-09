@@ -27,12 +27,12 @@ body {
 }
 
 .col.hidden {
-    background-color: #59aec7;
+    background-color: #7eb8b7;
     cursor: pointer;
 }
 
 .col.hidden.mine {
-    background-color: rgba(255, 0, 0, 0.776);
+    background-color: #c74848;
 } 
 
 .col.hidden:hover {

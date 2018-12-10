@@ -42,10 +42,10 @@ function gameOver(isWin) {
 
     if (isWin) {
         msg = 'YOU WON!';
-        icon = 'fa fa-flag-o';
+        icon = './assets/images/flag-icon.png';
     } else {
         msg = 'YOU LOST!';
-        icon = 'fa fa-bomb';
+        icon = './assets/images/bomb-icon.png';
     }    
 
     //reveal hidden cells to show icon and count
@@ -61,8 +61,8 @@ function gameOver(isWin) {
         if (!cell.classList.contains('mine')){
             cell.innerHTML = count === 0 ? "" : count;
         } else {
-            let iconElem = document.createElement('i');
-            iconElem.classList = icon;
+            let iconElem = document.createElement('img');
+            iconElem.setAttribute('src',icon);
             cell.appendChild(iconElem);
         }
 

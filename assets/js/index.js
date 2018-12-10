@@ -8,7 +8,9 @@ const ROWS = COLS = 10;
 //************************************************************************/
 //BUILD BOARD:
 //************************************************************************/
-(function createBoard() {
+function createBoard() {
+    //clear any existing board
+    BOARD.innerHTML = "";
     for (let i = 0; i < ROWS; i++) {
         //create row with new div element
         let row = document.createElement('div');
@@ -28,14 +30,48 @@ const ROWS = COLS = 10;
         }
         BOARD.appendChild(row);
     }
-})()
+}
+createBoard();
 
 
 //************************************************************************/
 //GAME OVER:
 //************************************************************************/
-function gameOver(val) {
-    console.log('Game Over!');
+function gameOver(isWin) {
+    let msg = icon = null;
+
+    if (isWin) {
+        msg = 'YOU WON!';
+        icon = 'fa fa-flag-o';
+    } else {
+        msg = 'YOU LOST!';
+        icon = 'fa fa-bomb';
+    }    
+
+    //reveal hidden cells to show icon and count
+    let hiddenCells = document.querySelectorAll('.col.hidden')
+    for(let i = 0, n = hiddenCells.length; i < n; i++){
+        let cell = hiddenCells[i];
+
+        const row = cell.getAttribute('data-row');
+        const col = cell.getAttribute('data-col');
+
+        let count = getMineCount(+row, +col);
+
+        if (!cell.classList.contains('mine')){
+            cell.innerHTML = count === 0 ? "" : count;
+        } else {
+            let iconElem = document.createElement('i');
+            iconElem.classList = icon;
+            cell.appendChild(iconElem);
+        }
+
+        cell.classList.remove('hidden');
+    }
+    setTimeout(() => {
+        alert(msg)
+        createBoard();
+    }, 500)
 }
 
 
@@ -118,6 +154,7 @@ BOARD.addEventListener('click', function (e) {
             const cell = e.target
             const row = cell.dataset.row;
             const col = cell.dataset.col;
+
             //Reveal function
             reveal(row, col);
 
@@ -125,7 +162,7 @@ BOARD.addEventListener('click', function (e) {
             const collectHiddenElems = document.querySelectorAll('.col.hidden');
             const collectMineElems = document.querySelectorAll('.col.mine');
             const isGameOver = collectHiddenElems.length === collectMineElems.length;
-            if (isGameOver){
+            if (isGameOver) {
                 gameOver(true);
             }
         }

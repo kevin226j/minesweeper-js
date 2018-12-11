@@ -50,6 +50,7 @@ function gameOver(isWin) {
 
     //reveal hidden cells to show icon and count
     let hiddenCells = document.querySelectorAll('.col.hidden')
+    
     for(let i = 0, n = hiddenCells.length; i < n; i++){
         let cell = hiddenCells[i];
 

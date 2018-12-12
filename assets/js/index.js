@@ -36,11 +36,11 @@ function runTimer() {
 }
 
 
-function startTimer() {
+(function startTimer() {
     interval = setInterval(runTimer, 10);
-}
+})();
 
-startTimer();
+
 
 
 //************************************************************************/

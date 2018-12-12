@@ -6,6 +6,13 @@ const ROWS = COLS = 10;
 
 
 //************************************************************************/
+//SET ELEMENTS FOR TIMER:
+//************************************************************************/
+let TIMER = document.querySelector('.timer');
+let TIMER_ARRAY = [0, 0, 0, 0];
+
+
+//************************************************************************/
 //BUILD BOARD:
 //************************************************************************/
 function createBoard() {
@@ -46,12 +53,12 @@ function gameOver(isWin) {
     } else {
         msg = 'YOU LOST!';
         icon = './assets/images/bomb-icon.png';
-    }    
+    }
 
     //reveal hidden cells to show icon and count
     let hiddenCells = document.querySelectorAll('.col.hidden')
-    
-    for(let i = 0, n = hiddenCells.length; i < n; i++){
+
+    for (let i = 0, n = hiddenCells.length; i < n; i++) {
         let cell = hiddenCells[i];
 
         const row = cell.getAttribute('data-row');
@@ -59,11 +66,11 @@ function gameOver(isWin) {
 
         let count = getMineCount(+row, +col);
 
-        if (!cell.classList.contains('mine')){
+        if (!cell.classList.contains('mine')) {
             cell.innerHTML = count === 0 ? "" : count;
         } else {
             let iconElem = document.createElement('img');
-            iconElem.setAttribute('src',icon);
+            iconElem.setAttribute('src', icon);
             cell.appendChild(iconElem);
         }
 
@@ -169,3 +176,35 @@ BOARD.addEventListener('click', function (e) {
         }
     }
 }, false);
+
+
+
+//************************************************************************/
+//TIMER:
+//************************************************************************/
+var interval;
+
+function insertZero(time) {
+    return (time <= 9) ? time = "0" + time : time;
+}
+
+
+function runTimer() {
+
+    let timeStr = insertZero(TIMER_ARRAY[0]) + ":" + insertZero(TIMER_ARRAY[1]) + ":" + insertZero(TIMER_ARRAY[2]);
+
+    TIMER.innerHTML = timeStr;
+
+    TIMER_ARRAY[3]++;
+    
+    TIMER_ARRAY[0] = Math.floor(((TIMER_ARRAY[3])/100)/60);
+    TIMER_ARRAY[1] = Math.floor((TIMER_ARRAY[3]/100) - (TIMER_ARRAY[0]*60));
+    TIMER_ARRAY[2] = Math.floor((TIMER_ARRAY[3] - TIMER_ARRAY[1]*100) - (TIMER_ARRAY[0]*6000));
+}
+
+
+function startTimer() {
+    interval = setInterval(runTimer, 10);
+}
+
+startTimer();

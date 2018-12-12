@@ -51,3 +51,8 @@ img {
 .row .col:last-child {
     border-right: none;
 }
+
+.timer {
+    font-size: 1em;
+    font-weight: bold;
+}

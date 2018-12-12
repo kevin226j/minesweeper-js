@@ -22,7 +22,6 @@ function insertZero(time) {
     return (time <= 9) ? time = "0" + time : time;
 }
 
-
 function runTimer() {
 
     let timeStr = insertZero(TIMER_ARRAY[0]) + ":" + insertZero(TIMER_ARRAY[1]) + ":" + insertZero(TIMER_ARRAY[2]);

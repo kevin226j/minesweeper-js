@@ -14,36 +14,6 @@ let TIMER_ARRAY = [0, 0, 0, 0];
 
 
 //************************************************************************/
-//TIMER:
-//************************************************************************/
-var interval;
-
-function insertZero(time) {
-    return (time <= 9) ? time = "0" + time : time;
-}
-
-function runTimer() {
-
-    let timeStr = insertZero(TIMER_ARRAY[0]) + ":" + insertZero(TIMER_ARRAY[1]) + ":" + insertZero(TIMER_ARRAY[2]);
-
-    TIMER.innerHTML = timeStr;
-
-    TIMER_ARRAY[3]++;
-    
-    TIMER_ARRAY[0] = Math.floor(((TIMER_ARRAY[3])/100)/60); //milliseconds
-    TIMER_ARRAY[1] = Math.floor((TIMER_ARRAY[3]/100) - (TIMER_ARRAY[0]*60)); //seconds
-    TIMER_ARRAY[2] = Math.floor((TIMER_ARRAY[3] - TIMER_ARRAY[1]*100) - (TIMER_ARRAY[0]*6000)); //minutes
-}
-
-
-(function startTimer() {
-    interval = setInterval(runTimer, 10);
-})();
-
-
-
-
-//************************************************************************/
 //BUILD BOARD:
 //************************************************************************/
 function createBoard() {
@@ -110,6 +80,8 @@ function gameOver(isWin) {
     setTimeout(() => {
         alert(msg)
         createBoard();
+
+        resetTimer();
     }, 500)
 }
 
@@ -210,3 +182,37 @@ BOARD.addEventListener('click', function (e) {
 
 
 
+//************************************************************************/
+//TIMER:
+//************************************************************************/
+var interval;
+
+function insertZero(time) {
+    return (time <= 9) ? time = "0" + time : time;
+}
+
+function runTimer() {
+
+    let timeStr = insertZero(TIMER_ARRAY[0]) + ":" + insertZero(TIMER_ARRAY[1]) + ":" + insertZero(TIMER_ARRAY[2]);
+
+    TIMER.innerHTML = timeStr;
+
+    TIMER_ARRAY[3]++;
+    
+    TIMER_ARRAY[0] = Math.floor(((TIMER_ARRAY[3])/100)/60); //milliseconds
+    TIMER_ARRAY[1] = Math.floor((TIMER_ARRAY[3]/100) - (TIMER_ARRAY[0]*60)); //seconds
+    TIMER_ARRAY[2] = Math.floor((TIMER_ARRAY[3] - TIMER_ARRAY[1]*100) - (TIMER_ARRAY[0]*6000)); //minutes
+}
+
+function resetTimer() {
+    clearInterval(interval);
+    TIMER.innerHTML = "00:00:00";
+    TIMER_ARRAY = [0,0,0,0];
+    startTimer();
+}
+
+function startTimer() {
+    interval = setInterval(runTimer, 10);
+}
+
+startTimer();

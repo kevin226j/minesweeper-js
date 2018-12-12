@@ -197,9 +197,9 @@ function runTimer() {
 
     TIMER_ARRAY[3]++;
     
-    TIMER_ARRAY[0] = Math.floor(((TIMER_ARRAY[3])/100)/60);
-    TIMER_ARRAY[1] = Math.floor((TIMER_ARRAY[3]/100) - (TIMER_ARRAY[0]*60));
-    TIMER_ARRAY[2] = Math.floor((TIMER_ARRAY[3] - TIMER_ARRAY[1]*100) - (TIMER_ARRAY[0]*6000));
+    TIMER_ARRAY[0] = Math.floor(((TIMER_ARRAY[3])/100)/60); //milliseconds
+    TIMER_ARRAY[1] = Math.floor((TIMER_ARRAY[3]/100) - (TIMER_ARRAY[0]*60)); //seconds
+    TIMER_ARRAY[2] = Math.floor((TIMER_ARRAY[3] - TIMER_ARRAY[1]*100) - (TIMER_ARRAY[0]*6000)); //minutes
 }
 
 

@@ -5,6 +5,7 @@ const BOARD = document.getElementById('board');
 //const WIDGETS = document.getElementById('widget');
 const ROWS = COLS = 10;
 
+
 //************************************************************************/
 //SET ELEMENTS FOR TIMER:
 //************************************************************************/
@@ -13,9 +14,20 @@ let TIMER_ARRAY = [0, 0, 0, 0];
 
 
 //************************************************************************/
+//SET ELEMENTS FOR SELECT:
+//************************************************************************/
+let SELECT = document.getElementById('select');
+let selectVal = SELECT.value;
+SELECT.addEventListener('change', () => {
+    selectVal = SELECT.value
+})
+
+
+
+//************************************************************************/
 //BUILD BOARD:
 //************************************************************************/
-function createBoard(difficulty='Easy') {
+function createBoard(difficulty = 'Easy') {
 
     let threshold = null;
 
@@ -24,13 +36,13 @@ function createBoard(difficulty='Easy') {
             threshold = 0.1;
             break;
         case 'Medium':
-            threshold = 0.3;
+            threshold = 0.23;
             break;
         case 'Hard':
             threshold = 0.5;
             break;
         default:
-            threshold = 0.2;
+            threshold = 0.15;
     }
 
     //clear any existing board
@@ -55,7 +67,7 @@ function createBoard(difficulty='Easy') {
         BOARD.appendChild(row);
     }
 }
-createBoard();
+createBoard(selectVal);
 
 
 
@@ -116,7 +128,9 @@ function gameOver(isWin) {
     setTimeout(() => {
         alert(msg)
         createBoard();
-
+        BUTTON.disabled = false //un-disable button 
+        disableDropDown(false);
+        boardListen(false);
         resetTimer();
     }, 500)
 }
@@ -192,7 +206,13 @@ function getMineCount(i, j) {
 //************************************************************************/
 //BOARD CLICK:
 //************************************************************************/
-BOARD.addEventListener('click', function (e) {
+function boardListen(bool) {
+    (bool) ? BOARD.addEventListener('click', boardEvent, false) : 
+        BOARD.removeEventListener('click', boardEvent, false);
+}
+
+
+function boardEvent(e) {
     const targetClass = e.target.classList;
     if (targetClass.contains('hidden') && targetClass.contains('col')) {
         if (targetClass.contains('mine')) {
@@ -214,7 +234,7 @@ BOARD.addEventListener('click', function (e) {
             }
         }
     }
-}, false);
+}
 
 
 
@@ -244,31 +264,46 @@ function resetTimer() {
     clearInterval(interval);
     TIMER.innerHTML = "00:00:00";
     TIMER_ARRAY = [0, 0, 0, 0];
-    startTimer();
 }
 
 function startTimer() {
     interval = setInterval(runTimer, 10);
 }
 
-startTimer();
+// startTimer();
 
 
 
 
-//************************************************************************/
-//SET ELEMENTS FOR SELECT:
-//************************************************************************/
-let SELECT = document.getElementById('select');
-let selectVal = null;
 
-SELECT.addEventListener('change', function () {
-    console.log(this.value);
-})
 
 
 
 //************************************************************************/
 //START BUTTON:
 //************************************************************************/
+const BUTTON = document.getElementById('btn');
 
+function start() {
+    createBoard(selectVal);
+
+    startTimer();
+
+    //disable button functionality until game is over
+    BUTTON.disabled = true;
+
+    //disable drop down items until game is over
+    disableDropDown(true);
+
+    //add event listener to board
+    boardListen(true);
+
+}
+
+function disableDropDown(bool) {
+    let options = SELECT.querySelectorAll('option');
+    for (let i = 1, n = options.length; i < n; i++) {
+        const option = options[i];
+        (bool) ? option.setAttribute('disabled', bool): option.removeAttribute('disabled');
+    }
+}

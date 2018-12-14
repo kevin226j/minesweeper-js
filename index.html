@@ -3,20 +3,33 @@
 
 <head>
     <meta charset="utf-8">
-    <title>MineSweeper</title>    
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MineSweeper</title>
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
-    <h1>MINESWEEPER</h1> 
+    <h1>MINESWEEPER</h1>
 
-    <div class="widget">
-        <section class="clock"> 
+    <div id="widget">
+
+        <div class="clock">
             <p class="timer">00:00:00</p>
-        </section>
+        </div>
+        
+
+        <select id="select">
+            <option value="" disabled selected>Select Difficulty:</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard" >Hard</option>
+        </select>
+
+        
+        <button onClick="start()" id="btn">Start</button>
     </div>
     <div id="board"></div>
-    
+
     <script src="./assets/js/index.js"></script>
 </body>
 

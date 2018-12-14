@@ -2,8 +2,8 @@
 //SET ELEMENTS FOR BOARD:
 //************************************************************************/
 const BOARD = document.getElementById('board');
+//const WIDGETS = document.getElementById('widget');
 const ROWS = COLS = 10;
-
 
 //************************************************************************/
 //SET ELEMENTS FOR TIMER:
@@ -12,11 +12,27 @@ let TIMER = document.querySelector('.timer');
 let TIMER_ARRAY = [0, 0, 0, 0];
 
 
-
 //************************************************************************/
 //BUILD BOARD:
 //************************************************************************/
-function createBoard() {
+function createBoard(difficulty='Easy') {
+
+    let threshold = null;
+
+    switch (difficulty) {
+        case 'Easy':
+            threshold = 0.1;
+            break;
+        case 'Medium':
+            threshold = 0.3;
+            break;
+        case 'Hard':
+            threshold = 0.5;
+            break;
+        default:
+            threshold = 0.2;
+    }
+
     //clear any existing board
     BOARD.innerHTML = "";
     for (let i = 0; i < ROWS; i++) {
@@ -32,7 +48,7 @@ function createBoard() {
             col.classList += 'col hidden ';
 
             //randomize mines on board
-            if (Math.random() < 0.1) col.classList += 'mine';
+            if (Math.random() < threshold) col.classList += 'mine';
 
             row.appendChild(col);
         }
@@ -40,6 +56,26 @@ function createBoard() {
     }
 }
 createBoard();
+
+
+
+//************************************************************************/
+//CREATE TIMER:
+/*
+(function createTimer() {
+    let section = document.createElement('section');
+    section.classList += 'timer'
+    let p = document.createElement('p');
+    p.innerText = '00:00:00';
+    section.append(p);
+    WIDGETS.appendChild(section);
+})()
+*/
+//************************************************************************/
+
+
+
+
 
 
 //************************************************************************/
@@ -154,7 +190,7 @@ function getMineCount(i, j) {
 
 
 //************************************************************************/
-//CLICK:
+//BOARD CLICK:
 //************************************************************************/
 BOARD.addEventListener('click', function (e) {
     const targetClass = e.target.classList;
@@ -198,16 +234,16 @@ function runTimer() {
     TIMER.innerHTML = timeStr;
 
     TIMER_ARRAY[3]++;
-    
-    TIMER_ARRAY[0] = Math.floor(((TIMER_ARRAY[3])/100)/60); //milliseconds
-    TIMER_ARRAY[1] = Math.floor((TIMER_ARRAY[3]/100) - (TIMER_ARRAY[0]*60)); //seconds
-    TIMER_ARRAY[2] = Math.floor((TIMER_ARRAY[3] - TIMER_ARRAY[1]*100) - (TIMER_ARRAY[0]*6000)); //minutes
+
+    TIMER_ARRAY[0] = Math.floor(((TIMER_ARRAY[3]) / 100) / 60); //minutes
+    TIMER_ARRAY[1] = Math.floor((TIMER_ARRAY[3] / 100) - (TIMER_ARRAY[0] * 60)); //seconds
+    TIMER_ARRAY[2] = Math.floor((TIMER_ARRAY[3] - TIMER_ARRAY[1] * 100) - (TIMER_ARRAY[0] * 6000)); //milliseconds
 }
 
 function resetTimer() {
     clearInterval(interval);
     TIMER.innerHTML = "00:00:00";
-    TIMER_ARRAY = [0,0,0,0];
+    TIMER_ARRAY = [0, 0, 0, 0];
     startTimer();
 }
 
@@ -216,3 +252,23 @@ function startTimer() {
 }
 
 startTimer();
+
+
+
+
+//************************************************************************/
+//SET ELEMENTS FOR SELECT:
+//************************************************************************/
+let SELECT = document.getElementById('select');
+let selectVal = null;
+
+SELECT.addEventListener('change', function () {
+    console.log(this.value);
+})
+
+
+
+//************************************************************************/
+//START BUTTON:
+//************************************************************************/
+

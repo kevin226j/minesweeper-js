@@ -32,6 +32,8 @@ function createBoard(difficulty = 'Easy') {
     let threshold = null;
 
     switch (difficulty) {
+        case 'Demo' :
+            threshold = 0.3
         case 'Easy':
             threshold = 0.1;
             break;
@@ -60,7 +62,13 @@ function createBoard(difficulty = 'Easy') {
             col.classList += 'col hidden ';
 
             //randomize mines on board
-            if (Math.random() < threshold) col.classList += 'mine';
+            if (Math.random() < threshold) {
+                col.classList += 'mine';
+                
+                //color background red if 'Demo'
+                if(difficulty === 'Demo')
+                    col.style.backgroundColor = '#c74848';
+            }
 
             row.appendChild(col);
         }

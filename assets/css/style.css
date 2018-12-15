@@ -37,7 +37,7 @@ img {
 }
 
 .col.hidden.mine {
-    background-color: #c74848;
+    /* background-color: #c74848; */
 }
 
 .col.hidden:hover {

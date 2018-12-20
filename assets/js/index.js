@@ -17,7 +17,7 @@ const ROWS = COLS = 10;
     p.classList += 'timer';
     p.innerText = '00:00:00';
     div.append(p);
-    WIDGETS.appendChild(div);
+    WIDGETS.prepend(div);
 })()
 
 

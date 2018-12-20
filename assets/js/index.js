@@ -1,9 +1,26 @@
 //************************************************************************/
-//SET ELEMENTS FOR BOARD:
+//SET ELEMENTS FOR BOARD: JS
 //************************************************************************/
 const BOARD = document.getElementById('board');
-//const WIDGETS = document.getElementById('widget');
+const WIDGETS = document.getElementById('widget');
 const ROWS = COLS = 10;
+
+
+//************************************************************************/
+//CREATE TIMER: (HTML)
+//************************************************************************/
+
+(function createTimer() {
+    let div = document.createElement('div');
+    div.classList += 'clock'
+    let p = document.createElement('p');
+    p.classList += 'timer';
+    p.innerText = '00:00:00';
+    div.append(p);
+    WIDGETS.appendChild(div);
+})()
+
+
 
 
 //************************************************************************/
@@ -11,6 +28,8 @@ const ROWS = COLS = 10;
 //************************************************************************/
 let TIMER = document.querySelector('.timer');
 let TIMER_ARRAY = [0, 0, 0, 0];
+
+
 
 
 //************************************************************************/
@@ -76,25 +95,6 @@ function createBoard(difficulty = 'Easy') {
     }
 }
 createBoard(selectVal);
-
-
-
-//************************************************************************/
-//CREATE TIMER:
-/*
-(function createTimer() {
-    let section = document.createElement('section');
-    section.classList += 'timer'
-    let p = document.createElement('p');
-    p.innerText = '00:00:00';
-    section.append(p);
-    WIDGETS.appendChild(section);
-})()
-*/
-//************************************************************************/
-
-
-
 
 
 
@@ -277,15 +277,6 @@ function resetTimer() {
 function startTimer() {
     interval = setInterval(runTimer, 10);
 }
-
-// startTimer();
-
-
-
-
-
-
-
 
 //************************************************************************/
 //START BUTTON:

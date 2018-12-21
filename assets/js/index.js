@@ -4,13 +4,17 @@
 const BOARD = document.getElementById('board');
 const WIDGETS = document.getElementById('widget');
 const ROWS = COLS = 10;
+const LEVELS = ['Demo', 'Easy', 'Medium', 'Hard'];
 
 
 //************************************************************************/
-//CREATE TIMER: (HTML)
+//CREATE HTML WIDGETS
 //************************************************************************/
 
-(function createTimer() {
+(function () {
+    //************************************************************************/
+    //CREATE TIMER: (HTML)
+    //************************************************************************/
     let div = document.createElement('div');
     div.classList += 'clock'
     let p = document.createElement('p');
@@ -18,9 +22,35 @@ const ROWS = COLS = 10;
     p.innerText = '00:00:00';
     div.append(p);
     WIDGETS.prepend(div);
+
+
+    //************************************************************************/
+    //CREATE DROPDOWN: (HTML)
+    //************************************************************************/
+    let select = document.createElement('select');
+    select.setAttribute('id', 'select');
+    select.innerHTML = '<option value="" disabled>Select Difficulty:</option>';
+
+    for(let i = 0, n = LEVELS.length; i < n; i++){
+        const difficulty = LEVELS[i];
+        let option = document.createElement('option');
+
+        if(difficulty === 'Easy') 
+            option.selected = true;
+
+        option.setAttribute('value', difficulty);
+        option.innerHTML = difficulty;
+        select.append(option);
+    }
+    WIDGETS.append(select);
+
+
+    //************************************************************************/
+    //CREATE BUTTON: (HTML)
+    //************************************************************************/    
+
+
 })()
-
-
 
 
 //************************************************************************/

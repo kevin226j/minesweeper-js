@@ -21,7 +21,6 @@ const LEVELS = ['Demo', 'Easy', 'Medium', 'Hard'];
     p.classList += 'timer';
     p.innerText = '00:00:00';
     div.append(p);
-    WIDGETS.prepend(div);
 
 
     //************************************************************************/
@@ -42,13 +41,25 @@ const LEVELS = ['Demo', 'Easy', 'Medium', 'Hard'];
         option.innerHTML = difficulty;
         select.append(option);
     }
-    WIDGETS.append(select);
+    
 
 
     //************************************************************************/
     //CREATE BUTTON: (HTML)
     //************************************************************************/    
+    let button = document.createElement('button');
+    button.setAttribute('id', 'btn');
+    button.setAttribute('onClick', 'start()');
+    button.innerHTML = '<p>Start</p>'
 
+
+    //************************************************************************/
+    //APPEND ELEMENTS: (HTML)
+    //************************************************************************/  
+
+    WIDGETS.append(div)
+    WIDGETS.append(button);
+    WIDGETS.append(select)
 
 })()
 

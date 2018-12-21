@@ -67,7 +67,7 @@ img {
 select {
 
     height: 4em;
-    width: 25%;
+    /* width: 25%; */
     padding: 1.5em auto;
     margin: 1em auto;
     background-color: none;
@@ -78,7 +78,7 @@ select {
     letter-spacing: 0.5em;
 
     
-    /* margin: 50px; */
+    margin: 10px;
     /* width: auto; */
     padding: 5px 35px 5px 5px;
     /* font-size: 16px; */

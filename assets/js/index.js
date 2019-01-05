@@ -53,14 +53,31 @@ const LEVELS = ['Demo', 'Easy', 'Medium', 'Hard'];
     button.innerHTML = '<p>Start</p>'
 
 
+
+    //************************************************************************/
+    //CREATE SCOREBOARD: (HTML)
+    //************************************************************************/    
+    let scoreBoard = document.createElement('div');
+    scoreBoard.setAttribute('id', 'score');
+
+    let scores = ['Win', 'Lose'];
+
+    scores.forEach(elem => {
+        let h3 = document.createElement('h3');
+        h3.setAttribute('class', elem.toLowerCase());
+        h3.innerHTML = elem + ': <span>0</span>'
+        scoreBoard.append(h3);
+    })
+
+
     //************************************************************************/
     //APPEND ELEMENTS: (HTML)
     //************************************************************************/  
-
-    WIDGETS.append(div)
+    WIDGETS.append(div);
     WIDGETS.append(button);
-    WIDGETS.append(select)
-
+    WIDGETS.append(select);
+    BOARD.appendChild(scoreBoard);
+    
 })()
 
 
@@ -139,20 +156,23 @@ createBoard(selectVal);
 
 
 
+
 //************************************************************************/
 //GAME OVER:
 //************************************************************************/
 function gameOver(isWin) {
     let msg = icon = null;
+    let scoreBoard = null
 
     if (isWin) {
         msg = 'YOU WON!';
         icon = './assets/images/flag-icon.png';
+        scoreBoard = document.querySelector('.win span');
     } else {
         msg = 'YOU LOST!';
         icon = './assets/images/bomb-icon.png';
+        scoreBoard = document.querySelector('.lose span');
     }
-
     //reveal hidden cells to show icon and count
     let hiddenCells = document.querySelectorAll('.col.hidden')
 
@@ -175,6 +195,8 @@ function gameOver(isWin) {
         cell.classList.remove('hidden');
     }
     setTimeout(() => {
+        let score = +scoreBoard.innerHTML++;
+        score.innerHTML = score;
         alert(msg)
         createBoard();
         BUTTON.disabled = false //un-disable button 

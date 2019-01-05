@@ -118,10 +118,19 @@ select {
    
   }
 
-
   /* Widget */
   .widget {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+}
+
+#score {
+    padding: 0;
+    border: 0;
+    display: flex;
+    justify-content: center;
+}
+.lose{
+    padding-left: 10px;
 }

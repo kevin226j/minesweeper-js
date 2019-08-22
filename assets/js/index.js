@@ -195,15 +195,15 @@ function gameOver(isWin) {
         cell.classList.remove('hidden');
     }
     setTimeout(() => {
-        let score = +scoreBoard.innerHTML++;
-        score.innerHTML = score;
+        //let score = +scoreBoard.innerHTML++;
+        // score.innerHTML = score;
         alert(msg)
         createBoard();
         BUTTON.disabled = false //un-disable button 
         disableDropDown(false);
         boardListen(false);
         resetTimer();
-    }, 500)
+    }, 300)
 }
 
 
